@@ -1,12 +1,23 @@
+# Description:
+#   Generates quasi-deniable rumor mill for hubot
+#
+# Dependencies:
+#   "sha1": "1.1.1"
+#
+# Commands:
+#   register [alias] [password] - Register an alias with rumorbot
+#   login [alias] [password] - log in to a given alias
+#   rumor [message] - Have rumorbot spit out [message] to #rumormill
+#
+# Notes:
+#   <optional notes required for the script>
+#
+# Author:
+#   lunarca
+
 sha1 = require('sha1')
 
 module.exports = (robot) ->
-
-    robot.respond /auth (\S*)/i, (res) ->
-        password = res.match[1]
-        hash = sha1(res.match[1])
-        robot.messageRoom '#bot-testing', "#{password}, #{hash}"
-
 
     robot.respond /register (\S*) (.*)/, (res) ->
         username = res.match[1]
@@ -58,6 +69,6 @@ module.exports = (robot) ->
         message = res.match[1]
 
         if alias
-            robot.messageRoom '#bot-testing', "[#{alias}] #{message}"
+            robot.messageRoom '#rumormill', "[#{alias}] #{message}"
         else
             res.reply "You are not logged in to any alias"
