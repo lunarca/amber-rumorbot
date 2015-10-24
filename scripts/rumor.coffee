@@ -7,7 +7,8 @@
 # Commands:
 #   register [alias] [password] - Register an alias with rumorbot
 #   login [alias] [password] - log in to a given alias
-#   rumor [message] - Have rumorbot spit out [message] to #rumormill
+#   rumor [message] - spit out [message] to #rumormill, attributed 
+#   anonrumor [message] - spit out [message] to #rumormill, unattributed
 #
 # Notes:
 #   <optional notes required for the script>
@@ -72,3 +73,8 @@ module.exports = (robot) ->
             robot.messageRoom '#rumormill', "[#{alias}] #{message}"
         else
             res.reply "You are not logged in to any alias"
+
+
+    robot.respond /anonrumor (.*)/i, (res) ->
+        message = res.match[1]
+        robot.messageRoom '#rumormill', "[unattributed] #{message}"
